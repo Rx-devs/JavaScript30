@@ -1,3 +1,3 @@
 ## Drum Kit Web
 
-[Drum Kit](https://drum-kit-devs.netlify.app).
+Play your own music here [Drum Kit Web App](https://drum-kit-devs.netlify.app)
