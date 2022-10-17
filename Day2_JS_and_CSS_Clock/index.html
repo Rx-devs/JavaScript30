@@ -60,21 +60,21 @@
 			width: 43px;
 			background-color: #6A5758;
 			z-index: 1;
-			transform: rotate(371deg);
+			transform: rotate(0deg);
 		}
 		.min-hand{
 			height: 3px;
 			width: 57px;
 			background-color: #5A4A52;
 			z-index: 2;
-			transform: rotate(35deg);
+			transform: rotate(-90deg);
 		}
 		.second-hand{
 			height: 2px;
 			width: 60px;
 			background-color: #888086;
 			z-index: 3;
-			transform: rotate(90deg);
+			transform: rotate(-90deg);
 		}
 	</style>
 </head>
@@ -95,8 +95,39 @@
 
 
 	<script>
+		// console.log(new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds());
 		
-	</script>
+		// select clock hands
+		const second = document.querySelector('.second-hand');
+		const min = document.querySelector('.min-hand');
+		const hour = document.querySelector('.hour-hand');
+		
+		function getSecond() {
+			// get date
+			let currentDate = new Date();
+			let currentSeconds = currentDate.getSeconds();
+			let currentmin = currentDate.getMinutes();
+			let currentHours = currentDate.getHours();
+			// console.log(currentHours, currentmin, currentSeconds);
 
+			// get degrees for seconds
+			const secondDegrees = currentSeconds * (360/60) + (-90);
+			// console.log(secondDegrees);
+			
+			// get degrees for minutes
+			const minDegrees = currentmin * (360/60) + (-90);
+			// console.log(minDegrees)
+
+			// get degrees for hours
+			const hourDegrees = currentHours * (360/60) + 55;
+			// console.log(hourDegrees);
+			
+			// change transform styles
+			second.style.transform = `rotate(${secondDegrees}deg)`;
+			min.style.transform = `rotate(${minDegrees}deg)`;
+			hour.style.transform = `rotate(${hourDegrees}deg)`;
+		}
+		setInterval(getSecond, 1000);
+	</script>
 </body>
 </html>
