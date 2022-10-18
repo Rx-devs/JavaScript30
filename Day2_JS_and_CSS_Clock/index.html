@@ -7,6 +7,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&display=swap" rel="stylesheet">
 	<title>Clock</title>
 	<style>
+	/* 		common css */
 		*{
 			margin: 0; padding:0; box-sizing:border-box;
 		}
@@ -18,17 +19,36 @@
 			position: absolute;
 		}
 
-
+	/* 		custom css */
 		.container{
 			display: grid;
-			grid-template-columns: 400px 1fr;
+			grid-template-columns: 400px;
+			justify-content: center;
+			position: relative;
 		}
+	/* 		preloader */
+		.preloader{
+			display: flex;
+			position: absolute;
+			z-index: 5;
+			width: 100%;
+			height: 100%;
+			background-color: #FDFDFD;
+		}
+		.preloader img{
+			margin: auto;
+			width: 100px;
+		}
+
+	/* 		banner & clock styles */
 		.wrapper{
 			display:flex; 
 			position: relative;
 			width: 400px;
 			height: 600px;
-			background: no-repeat center/100% url("./wall_clock_banner.jpg");
+			background: no-repeat center/100% url("./images/wall_clock_banner.jpg");
+			border-radius: 10px;
+			margin: 25px;
 		}
 		.wrapper h2{
 			top: 4%;
@@ -87,19 +107,19 @@
 			padding: 20px;
 			text-align: center;
 		}
-			/* 		
-		.banner-wrapper{
-			width: 100%;
-			height: 600px;
-		}
-		.banner-wrapper img{
-			width: 100%;
+/* 		.side-banner{
+			background: no-repeat center/100% url("./images/banner_img.jpg");
 			height: 100%;
+			width: 100%;
+			background-color: #F2F2F2;
 		} */
 	</style>
 </head>
 <body>
 	<div class="container">
+		<div class="preloader">
+			<img src="./images/clock-animation.gif" />
+		</div>
 		<div class="wrapper">
 			<h2 class="absolute">Js Clock</h2>
 			<div class="clock absolute">
@@ -114,13 +134,17 @@
 				<p id="current-date-time"></p>
 			</div>
 		</div>
-		<div class="banner-wrapper">
-<!-- 			<img src=""/> -->
-		</div>
+		<div class="side-banner"></div>
 	</div>
 
 	<script>
-		// console.log(new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds());
+		// select & use preloader
+		const preloader = document.querySelector('.preloader');
+		const clockTimeout = setTimeout(clockFn, 2000);
+		function clockFn() {
+			preloader.style.display = 'none';
+			clearTimeout(clockTimeout);
+		}
 		
 		// select clock hands
 		const second = document.querySelector('.second-hand');
@@ -158,9 +182,7 @@
 		const currentDateAndTime = document.getElementById('current-date-time');
 		currentDateAndTime.innerHTML = new Date;
 		
-		// const time = new Date();
-		// const getTime = time.getHours() +' : '+ time.getMinutes() +' : '+ time.getSeconds();
-		
+		// console.log(new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds());
 	</script>
 </body>
 </html>
