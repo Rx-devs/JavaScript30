@@ -17,7 +17,12 @@
 		.absolute{
 			position: absolute;
 		}
-		
+
+
+		.container{
+			display: grid;
+			grid-template-columns: 400px 1fr;
+		}
 		.wrapper{
 			display:flex; 
 			position: relative;
@@ -32,17 +37,15 @@
 		.clock{
 		    top: 125px;
 		    left: 138px;
-		    background-color: #E8EBE8; 
- 		    border-radius: 50%;
+		    background-color: #E8EBE8;
+		    border-radius: 50%;
 		    width: 125px;
 		    height: 125px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
 		}
-		.clock-face{
-/* 			position:absolute; */
-		}
+		.clock-face{}
 		.clock-face span{
 			translate: -50% -50%;
 			width: 10px;
@@ -53,53 +56,68 @@
 		}
 		.clock-hand{
 			border-radius: 10px;
-			transform-origin: top left;
+			transform-origin: bottom left;
 		}
 		.hour-hand{
-			height: 3px;
-			width: 43px;
+			height: 43px;
+			width: 3px;
 			background-color: #6A5758;
 			z-index: 1;
 			transform: rotate(0deg);
+			translate: -50% -100%;
 		}
 		.min-hand{
-			height: 3px;
-			width: 57px;
+			height: 57px;
+			width: 2.5px;
 			background-color: #5A4A52;
 			z-index: 2;
-			transform: rotate(-90deg);
+			transform: rotate(0deg);
+			translate: -50% -100%;
 		}
 		.second-hand{
-			height: 2px;
-			width: 60px;
+			height: 62px;
+			width: 2px;
 			background-color: #888086;
 			z-index: 3;
-			transform: rotate(-90deg);
+			transform: rotate(0deg);
+			translate: -50% -100%;
 		}
 		.date-time-wrapper{
 			top: 55%;
 			padding: 20px;
 			text-align: center;
 		}
+			/* 		
+		.banner-wrapper{
+			width: 100%;
+			height: 600px;
+		}
+		.banner-wrapper img{
+			width: 100%;
+			height: 100%;
+		} */
 	</style>
 </head>
 <body>
-	
-	<div class="wrapper">
-		<h2 class="absolute">Js Clock</h2>
-		<div class="clock absolute">
-			<div class="clock-face">
-				<span class="absolute"></span>
-				<div class="hour-hand clock-hand absolute"></div>
-				<div class="min-hand clock-hand absolute"></div>
-				<div class="second-hand clock-hand absolute"></div>
+	<div class="container">
+		<div class="wrapper">
+			<h2 class="absolute">Js Clock</h2>
+			<div class="clock absolute">
+				<div class="clock-face">
+					<span class="absolute"></span>
+					<div class="hour-hand clock-hand absolute"></div>
+					<div class="min-hand clock-hand absolute"></div>
+					<div class="second-hand clock-hand absolute"></div>
+				</div>
+			</div>
+			<div class="date-time-wrapper absolute">
+				<p id="current-date-time"></p>
 			</div>
 		</div>
-		<div class="date-time-wrapper absolute"">
-			<p id="current-date-time"></p>
+		<div class="banner-wrapper">
+<!-- 			<img src=""/> -->
 		</div>
 	</div>
-
 
 	<script>
 		// console.log(new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds());
@@ -118,15 +136,15 @@
 			// console.log(currentHours, currentmin, currentSeconds);
 
 			// get degrees for seconds
-			const secondDegrees = currentSeconds * (360/60) + (-90);
+			const secondDegrees = currentSeconds * (360/60);
 			// console.log(secondDegrees);
 			
 			// get degrees for minutes
-			const minDegrees = currentmin * (360/60) + (-90);
+			const minDegrees = currentmin * (360/60);
 			// console.log(minDegrees)
 
 			// get degrees for hours
-			const hourDegrees = currentHours * (360/60) + 55;
+			const hourDegrees = currentHours * (360/12);
 			// console.log(hourDegrees);
 			
 			// change transform styles
