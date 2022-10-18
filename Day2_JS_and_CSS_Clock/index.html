@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&display=swap" rel="stylesheet">
 	<title>Clock</title>
 	<style>
-		/* 		common css */
+		/* common css */
 		* {
 			margin: 0;
 			padding: 0;
@@ -18,22 +18,22 @@
 		body {
 			font-family: 'Nunito', sans-serif;
 			font-weight: bold;
+			width: 100vw;
 		}
 
 		.absolute {
 			position: absolute;
 		}
 
-		/* 		custom css */
+		/* custom css */
 		.container {
 			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			padding: 25px;
 		}
 
-		/* 		preloader */
+		/* preloader */
 		.preloader {
 			display: flex;
 			position: absolute;
@@ -45,82 +45,88 @@
 
 		.preloader img {
 			margin: auto;
-			width: 100px;
+			width: 160px;
 		}
 
-		/* 		banner & clock styles */
+		/* banner & clock styles */
 		.wrapper {
-			display: flex;
-			position: relative;
-			width: 400px;
-			height: 600px;
-			background: no-repeat center/100% url("./images/wall_clock_banner.jpg");
-			border-radius: 10px;
+			height: 100vh;
+			width: 100vw;
+			background: url("./images/banner_img.jpg");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			padding: 30px;
 		}
-
-		.wrapper h2 {
-			top: 4%;
-			left: 40%;
+		
+		.date-time-wrapper {
+			text-align: center;
+			margin: -15px 0 30px 0;
 		}
 
 		.clock {
-			top: 125px;
-			left: 138px;
 			background-color: #E8EBE8;
 			border-radius: 50%;
-			width: 125px;
-			height: 125px;
+			width: 200px;
+			height: 200px;
+			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
-
-		/* .clock-face{} */
+		.clock img{
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			outline: 2px solid #dcc4bd;
+			border-radius: 50%;
+		}
 		.clock-face span {
-			translate: -50% -50%;
-			width: 10px;
-			height: 10px;
+			transform: translate(-40%,-50%);
+			width: 10px;height: 10px;
 			border-radius: 50%;
 			background-color: #5A4E4D;
 			z-index: 4;
+			position: absolute;
 		}
 
 		.clock-hand {
+			position:absolute;
 			border-radius: 10px;
-			transform-origin: bottom left;
 		}
 
 		.hour-hand {
-			height: 43px;
+			height: 42px;
+			display: inline;
 			width: 3px;
 			background-color: #6A5758;
 			z-index: 1;
+			/* transform: translateX(0) rotate(0deg) translateY(-100%); */
+			/* transform: translate(0px, -100px); */
 			transform: rotate(0deg);
-			translate: -50% -100%;
+			transform-origin: top left;
 		}
 
 		.min-hand {
-			height: 57px;
+			height: 56px;
+			display: inline;
 			width: 2.5px;
 			background-color: #5A4A52;
 			z-index: 2;
+			/* transform: translateX(0) rotate(120deg) translateY(-100%); */
 			transform: rotate(0deg);
-			translate: -50% -100%;
+			transform-origin: top left;
 		}
 
 		.second-hand {
-			height: 62px;
+			height: 63px;
+			display: inline;
 			width: 2px;
 			background-color: #888086;
 			z-index: 3;
+			/* transform: translateX(0) rotate(120deg) translateY(-100%); */
 			transform: rotate(0deg);
-			translate: -50% -100%;
-		}
-
-		.date-time-wrapper {
-			top: 55%;
-			padding: 20px;
-			text-align: center;
+			transform-origin: top left;
 		}
 	</style>
 </head>
@@ -131,25 +137,26 @@
 			<img src="./images/clock-animation.gif" />
 		</div>
 		<div class="wrapper">
-			<h2 class="absolute">Js Clock</h2>
-			<div class="clock absolute">
+			<div class="date-time-wrapper">
+				<p id="current-date-time"></p>
+			</div>
+			<div class="clock">
+				<img src="./images/clock.jpg">
 				<div class="clock-face">
-					<span class="absolute"></span>
-					<div class="hour-hand clock-hand absolute"></div>
-					<div class="min-hand clock-hand absolute"></div>
-					<div class="second-hand clock-hand absolute"></div>
+					<span class=""></span>
+					<div class="hour-hand clock-hand"></div>
+					<div class="min-hand clock-hand"></div>
+					<div class="second-hand clock-hand"></div>
 				</div>
 			</div>
-			<div class="date-time-wrapper absolute">
-				<h3 id="current-date-time"></h3>
-			</div>
+			
 		</div>
 	</div>
 
 	<script>
 		// select & use preloader
 		const preloader = document.querySelector('.preloader');
-		const clockTimeout = setTimeout(clockFn, 2000);
+		const clockTimeout = setTimeout(clockFn, 1500);
 		function clockFn() {
 			preloader.style.display = 'none';
 			clearTimeout(clockTimeout);
@@ -169,15 +176,15 @@
 			// console.log(currentHours, currentmin, currentSeconds);
 
 			// get degrees for seconds
-			const secondDegrees = currentSeconds * (360 / 60);
+			const secondDegrees = currentSeconds * (360 / 60) + 180;
 			// console.log(secondDegrees);
 
 			// get degrees for minutes
-			const minDegrees = currentmin * (360 / 60);
+			const minDegrees = currentmin * (360 / 60) + 180;
 			// console.log(minDegrees)
 
 			// get degrees for hours
-			const hourDegrees = currentHours * (360 / 12);
+			const hourDegrees = currentHours * (360 / 12) + 180;
 			// console.log(hourDegrees);
 
 			// change transform styles
