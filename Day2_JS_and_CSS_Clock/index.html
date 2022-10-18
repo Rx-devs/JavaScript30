@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7,27 +8,33 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&display=swap" rel="stylesheet">
 	<title>Clock</title>
 	<style>
-	/* 		common css */
-		*{
-			margin: 0; padding:0; box-sizing:border-box;
+		/* 		common css */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
 		}
-		body{
+
+		body {
 			font-family: 'Nunito', sans-serif;
 			font-weight: bold;
 		}
-		.absolute{
+
+		.absolute {
 			position: absolute;
 		}
 
-	/* 		custom css */
-		.container{
-			display: grid;
-			grid-template-columns: 400px;
-			justify-content: center;
+		/* 		custom css */
+		.container {
 			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 25px;
 		}
-	/* 		preloader */
-		.preloader{
+
+		/* 		preloader */
+		.preloader {
 			display: flex;
 			position: absolute;
 			z-index: 5;
@@ -35,38 +42,41 @@
 			height: 100%;
 			background-color: #FDFDFD;
 		}
-		.preloader img{
+
+		.preloader img {
 			margin: auto;
 			width: 100px;
 		}
 
-	/* 		banner & clock styles */
-		.wrapper{
-			display:flex; 
+		/* 		banner & clock styles */
+		.wrapper {
+			display: flex;
 			position: relative;
 			width: 400px;
 			height: 600px;
 			background: no-repeat center/100% url("./images/wall_clock_banner.jpg");
 			border-radius: 10px;
-			margin: 25px;
 		}
-		.wrapper h2{
+
+		.wrapper h2 {
 			top: 4%;
 			left: 40%;
 		}
-		.clock{
-		    top: 125px;
-		    left: 138px;
-		    background-color: #E8EBE8;
-		    border-radius: 50%;
-		    width: 125px;
-		    height: 125px;
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
+
+		.clock {
+			top: 125px;
+			left: 138px;
+			background-color: #E8EBE8;
+			border-radius: 50%;
+			width: 125px;
+			height: 125px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
-		.clock-face{}
-		.clock-face span{
+
+		/* .clock-face{} */
+		.clock-face span {
 			translate: -50% -50%;
 			width: 10px;
 			height: 10px;
@@ -74,11 +84,13 @@
 			background-color: #5A4E4D;
 			z-index: 4;
 		}
-		.clock-hand{
+
+		.clock-hand {
 			border-radius: 10px;
 			transform-origin: bottom left;
 		}
-		.hour-hand{
+
+		.hour-hand {
 			height: 43px;
 			width: 3px;
 			background-color: #6A5758;
@@ -86,7 +98,8 @@
 			transform: rotate(0deg);
 			translate: -50% -100%;
 		}
-		.min-hand{
+
+		.min-hand {
 			height: 57px;
 			width: 2.5px;
 			background-color: #5A4A52;
@@ -94,7 +107,8 @@
 			transform: rotate(0deg);
 			translate: -50% -100%;
 		}
-		.second-hand{
+
+		.second-hand {
 			height: 62px;
 			width: 2px;
 			background-color: #888086;
@@ -102,19 +116,15 @@
 			transform: rotate(0deg);
 			translate: -50% -100%;
 		}
-		.date-time-wrapper{
+
+		.date-time-wrapper {
 			top: 55%;
 			padding: 20px;
 			text-align: center;
 		}
-/* 		.side-banner{
-			background: no-repeat center/100% url("./images/banner_img.jpg");
-			height: 100%;
-			width: 100%;
-			background-color: #F2F2F2;
-		} */
 	</style>
 </head>
+
 <body>
 	<div class="container">
 		<div class="preloader">
@@ -131,10 +141,9 @@
 				</div>
 			</div>
 			<div class="date-time-wrapper absolute">
-				<p id="current-date-time"></p>
+				<h3 id="current-date-time"></h3>
 			</div>
 		</div>
-		<div class="side-banner"></div>
 	</div>
 
 	<script>
@@ -145,12 +154,12 @@
 			preloader.style.display = 'none';
 			clearTimeout(clockTimeout);
 		}
-		
+
 		// select clock hands
 		const second = document.querySelector('.second-hand');
 		const min = document.querySelector('.min-hand');
 		const hour = document.querySelector('.hour-hand');
-		
+
 		function getSecond() {
 			// get date
 			let currentDate = new Date();
@@ -160,17 +169,17 @@
 			// console.log(currentHours, currentmin, currentSeconds);
 
 			// get degrees for seconds
-			const secondDegrees = currentSeconds * (360/60);
+			const secondDegrees = currentSeconds * (360 / 60);
 			// console.log(secondDegrees);
-			
+
 			// get degrees for minutes
-			const minDegrees = currentmin * (360/60);
+			const minDegrees = currentmin * (360 / 60);
 			// console.log(minDegrees)
 
 			// get degrees for hours
-			const hourDegrees = currentHours * (360/12);
+			const hourDegrees = currentHours * (360 / 12);
 			// console.log(hourDegrees);
-			
+
 			// change transform styles
 			second.style.transform = `rotate(${secondDegrees}deg)`;
 			min.style.transform = `rotate(${minDegrees}deg)`;
@@ -181,8 +190,9 @@
 		// select time & date
 		const currentDateAndTime = document.getElementById('current-date-time');
 		currentDateAndTime.innerHTML = new Date;
-		
+
 		// console.log(new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds());
 	</script>
 </body>
+
 </html>
