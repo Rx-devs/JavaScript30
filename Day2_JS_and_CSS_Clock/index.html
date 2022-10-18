@@ -76,6 +76,11 @@
 			z-index: 3;
 			transform: rotate(-90deg);
 		}
+		.date-time-wrapper{
+			top: 55%;
+			padding: 20px;
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
@@ -90,7 +95,9 @@
 				<div class="second-hand clock-hand absolute"></div>
 			</div>
 		</div>
-		
+		<div class="date-time-wrapper absolute"">
+			<p id="current-date-time"></p>
+		</div>
 	</div>
 
 
@@ -128,6 +135,14 @@
 			hour.style.transform = `rotate(${hourDegrees}deg)`;
 		}
 		setInterval(getSecond, 1000);
+
+		// select time & date
+		const currentDateAndTime = document.getElementById('current-date-time');
+		currentDateAndTime.innerHTML = new Date;
+		
+		// const time = new Date();
+		// const getTime = time.getHours() +' : '+ time.getMinutes() +' : '+ time.getSeconds();
+		
 	</script>
 </body>
 </html>
