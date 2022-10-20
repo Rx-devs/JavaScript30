@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Scoped CSS variables and JS</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
+        <style>
+            :root{
+                --base: yellow;
+                --spacing: 10px;
+                --blur: 0px;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                
+            }
+            body{
+                background: #3A5C65;
+                color: #ffffff;
+                font-family: 'Open Sans', sans-serif;
+                height: 100vh;
+                display: flex;
+            }
+            main{
+                margin: auto ;
+                
+            }
+            h3{
+                margin-bottom: 20px;
+            }
+            img{
+                width: 550px;
+                height: 350px;
+                border-radius: 4px;
+                padding: var(--spacing);
+                background: var(--base);
+                filter: blur(var(--blur));
+            }
+            .highlight-txt{
+                color: var(--base);
+            }
+            .controls{
+                display: grid;
+                align-items: center;
+                justify-content: self-start;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .controls div{
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            
+        </style>
+    </head> 
+    <body>
+        <main>
+            <h3>Update CSS variables with <span class="highlight-txt"> JS</span> </h3>
+            <div class="controls">
+                
+                <div>
+                    <label for="spacing">Spacing </label>
+                    <input id="spacing" type="range" min="10" max="50" value="10" name="spacing" data-sizing="px">
+                </div>
+    
+                <div>
+                    <label for="blur">Blur </label>
+                    <input id="blur" type="range" min="0" max="10" value="1" name="blur" data-sizing="px">
+                </div>
+    
+                <div>
+                    <label for="base">Base Color </label>
+                    <input id="base" name="base" type="color" value="#000000">
+                </div>
+                
+            </div>
+                
+            <img src="https://i.ibb.co/r3qkKKM/hobbit.jpg">
+        </main>
+
+        
+        <script>
+            const inputs = document.querySelectorAll('.controls div input');
+            // console.log(inputs);
+
+            function handleUpdate() {
+                // console.log(this.value)
+                // console.log(this.dataset);
+                
+                const suffix = this.dataset.sizing || '';
+                // console.log(suffix);
+
+                // console.log(this.name);
+                document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+                
+            }
+
+            inputs.forEach(input => input.addEventListener('change', handleUpdate));
+            inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+            
+            
+            
+        </script>
+    </body>
+</html>
